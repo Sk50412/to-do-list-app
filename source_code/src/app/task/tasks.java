@@ -1,8 +1,10 @@
 package app.task;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
-
 
 public class tasks {
     String Event_name;
@@ -77,32 +79,87 @@ public class tasks {
             default -> System.out.println("enter correct number");
         }
     }
+    public static void addtask()
+    {
+        Scanner in = new Scanner(System.in);
+//        get the event name
+        System.out.println("enter event name");
+        String event_name = in.next();
+
+//        get the event description
+        System.out.println("enter the event description");
+        String event_descirption = in.next();
+
+//        get the due date in DD_MM_YYYY format
+//        adding a try block to check whether the input is in corrct format
+        System.out.println("enter the date in DD-MM-YYYY format");
+        String date = in.next();
+        try
+        {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String date1 = dateFormat.format(date);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("welcome to the to-do-list-app");
+        ArrayList<tasks> arr = new ArrayList<>(10);
+
+        display();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static void exitapp() {
     }
 
     private static void listall() {
-        
+
     }
 
     private static void edittask() {
-        
+
     }
 
     private static void deletetask() {
-        
-        
-    }
-
-    public void addtask()
-    {
-        getEvent_name();
-        getEvent_description();
-        getDue_date();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("welcome to the to-do-list-app");
-        display();
     }
 }
