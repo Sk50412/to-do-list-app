@@ -1,9 +1,6 @@
 package app.task;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.*;
 
 public class tasks {
@@ -20,20 +17,20 @@ public class tasks {
         this.is_complete=false;
     }
 
-    public Date getDue_date() {
-        return Due_date;
+    public String getEvent_name() {
+        return Event_name;
     }
 
     public String getEvent_description() {
         return Event_description;
     }
 
-    public boolean isIs_complete() {
-        return is_complete;
+    public Date getDue_date() {
+        return Due_date;
     }
 
-    public String getEvent_name() {
-        return Event_name;
+    public boolean isIs_complete() {
+        return is_complete;
     }
 
     public void setDue_date(Date due_date) {
@@ -64,50 +61,60 @@ public class tasks {
         System.out.println("4. Lists all task ");
         System.out.println("5. exit the application ");
         System.out.println("Enter your choice according to the number given");
-        getchoice();
     }
 
-    private static void getchoice() {
+    private static int getchoice() {
         Scanner in = new Scanner(System.in);
-        int choice = in.nextInt();
-        switch (choice){
-            case 1 -> addtask();
-            case 2 -> edittask();
-            case 3 -> deletetask();
-            case 4 -> listall();
-            case 5 -> exitapp();
-            default -> System.out.println("enter correct number");
-        }
+        return in.nextInt();
     }
-    public static void addtask()
-    {
-        Scanner in = new Scanner(System.in);
+    public static void addtask(Scanner in , ArrayList<tasks> taskList) {
 //        get the event name
         System.out.println("enter event name");
         String event_name = in.next();
 
 //        get the event description
         System.out.println("enter the event description");
-        String event_descirption = in.next();
+        String event_descirption = in.nextLine();
+        in.nextLine();
 
 //        get the due date in DD_MM_YYYY format
-//        adding a try block to check whether the input is in corrct format
+//        adding a try block to check whether the input is in correct format
+
         System.out.println("enter the date in DD-MM-YYYY format");
-        String date = in.next();
-        try
-        {
+
+        Date duedate;
+        String datestr = in.nextLine();
+        try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            String date1 = dateFormat.format(date);
-        } catch (Exception e) {
+            duedate = dateFormat.parse(datestr);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("enter in dd-MM-yyyy format only");
             throw new RuntimeException(e);
         }
+        tasks new_task = new tasks(event_name, event_descirption, duedate);
+        taskList.add(new_task);
     }
 
     public static void main(String[] args) {
         System.out.println("welcome to the to-do-list-app");
-        ArrayList<tasks> arr = new ArrayList<>(10);
-
+        ArrayList<tasks> taskList = new ArrayList<>(10);
         display();
+
+        int choice = 0;
+        while(choice!=5) {
+            choice = getchoice();
+            switch (choice) {
+                case 1 -> addtask(new Scanner(System.in), taskList);
+                case 2 -> edittask();
+                case 3 -> deletetask();
+                case 4 -> listall();
+                case 5 -> exitapp();
+                default -> System.out.println("enter correct number");
+            }
+        }
+        System.out.println(taskList);
     }
 
 
