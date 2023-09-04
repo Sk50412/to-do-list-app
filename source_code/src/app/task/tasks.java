@@ -70,12 +70,11 @@ public class tasks {
     public static void addtask(Scanner in , ArrayList<tasks> taskList) {
 //        get the event name
         System.out.println("enter event name");
-        String event_name = in.next();
+        String event_name = in.nextLine();
 
 //        get the event description
         System.out.println("enter the event description");
         String event_descirption = in.nextLine();
-        in.nextLine();
 
 //        get the due date in DD_MM_YYYY format
 //        adding a try block to check whether the input is in correct format
@@ -100,10 +99,10 @@ public class tasks {
     public static void main(String[] args) {
         System.out.println("welcome to the to-do-list-app");
         ArrayList<tasks> taskList = new ArrayList<>(10);
-        display();
 
         int choice = 0;
         while(choice!=5) {
+            display();
             choice = getchoice();
             switch (choice) {
                 case 1 -> addtask(new Scanner(System.in), taskList);
