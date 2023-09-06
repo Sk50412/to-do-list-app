@@ -1,0 +1,10 @@
+hello this is my first project
+
+first aim - 
+to create a program which can store the tasks in an array and then display all the tasks using command line interface
+
+second aim - 
+to add a file feature so that tasks can be saved even when the program is not running
+
+third aim -
+create a graphical user interface
