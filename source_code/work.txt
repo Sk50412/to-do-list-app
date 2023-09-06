@@ -1,0 +1,6 @@
+task 1
+create a add task function
+make sure it takes the input correctly
+now make an arraylist to store the input
+task 2
+make a method to access the data stored inside the arraylist
