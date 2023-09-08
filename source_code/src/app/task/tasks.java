@@ -9,12 +9,12 @@ public class tasks {
     Date Due_date;
     boolean is_complete;
 
-    public tasks(String event_name, String event_description, Date due_date)
+    public tasks(String event_name, String event_description, Date due_date, boolean completion)
     {
         this.Event_name=event_name;
         this.Event_description=event_description;
         this.Due_date=due_date;
-        this.is_complete=false;
+        this.is_complete=completion;
     }
 
     public String getEvent_name() {
@@ -67,6 +67,28 @@ public class tasks {
         Scanner in = new Scanner(System.in);
         return in.nextInt();
     }
+
+    public static void main(String[] args) {
+        System.out.println("welcome to the to-do-list-app");
+        ArrayList<tasks> taskList = new ArrayList<>(10);
+
+        int choice = 0;
+        while(choice!=5) {
+            display();
+            choice = getchoice();
+            switch (choice) {
+                case 1 -> addtask(new Scanner(System.in), taskList);
+                case 2 -> edittask(taskList);
+                case 3 -> deletetask();
+                case 4 -> listall(taskList);
+                case 5 -> exitapp();
+                default -> System.out.println("enter correct number");
+            }
+        }
+        System.out.println(taskList);
+    }
+
+
     public static void addtask(Scanner in , ArrayList<tasks> taskList) {
 //        get the event name
         System.out.println("enter event name");
@@ -92,80 +114,66 @@ public class tasks {
             System.out.println("enter in dd-MM-yyyy format only");
             throw new RuntimeException(e);
         }
-        tasks new_task = new tasks(event_name, event_descirption, duedate);
+
+        boolean completion = false;
+        tasks new_task = new tasks(event_name, event_descirption, duedate , completion);
         taskList.add(new_task);
     }
 
-    public static void main(String[] args) {
-        System.out.println("welcome to the to-do-list-app");
-        ArrayList<tasks> taskList = new ArrayList<>(10);
 
-        int choice = 0;
-        while(choice!=5) {
-            display();
-            choice = getchoice();
-            switch (choice) {
-                case 1 -> addtask(new Scanner(System.in), taskList);
-                case 2 -> edittask();
-                case 3 -> deletetask();
-                case 4 -> listall();
-                case 5 -> exitapp();
-                default -> System.out.println("enter correct number");
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static void listall(ArrayList<tasks> taskList) {
+        System.out.println("-------------------------");
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks current = taskList.get(i);
+            System.out.println("''''''''''''''''''''");
+            System.out.println("Event id "+i+1+current.toString());
+            System.out.println("''''''''''''''''''''");
         }
-        System.out.println(taskList);
+        System.out.println("-------------------------");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private static void exitapp() {
-    }
-
-    private static void listall() {
-
-    }
-
-    private static void edittask() {
+    private static void edittask(ArrayList<tasks> tasklist) {
+        Scanner in = new Scanner(System.in);
+//        listall(tasklist);
+        System.out.println("---------------------------------\n");
+        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *\n");
+        System.out.println("\nwhich element to edit in a task\n");
+        System.out.println("1.completion");
+        System.out.println("2.name of event");
+        System.out.println("3.description of event");
+        System.out.println("4.date to event \n");
+        System.out.println("enter your choice : ");
+        int choice = in.nextInt();
+        System.out.println("\n\n*  *  *  *  *  *  *  *  *  *  *  *");
+        System.out.println("\n---------------------------------");
 
     }
 
     private static void deletetask() {
     }
+
+    public String toString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String duedatestr = dateFormat.format(Due_date);
+        return " Event name : " + Event_name + "\n Event Description : " + Event_description + "\n Due Date : " + duedatestr + "\ncompletion : "+ is_complete;
+
+    }
+    private static void exitapp() {
+        System.out.println("exiting the application");
+    }
+
 }
