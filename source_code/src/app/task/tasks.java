@@ -1,5 +1,6 @@
-package app.task;
 
+package app.task;
+import app.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -85,7 +86,6 @@ public class tasks {
                 default -> System.out.println("enter correct number");
             }
         }
-        System.out.println(taskList);
     }
 
 
@@ -148,19 +148,21 @@ public class tasks {
 
     private static void edittask(ArrayList<tasks> tasklist) {
         Scanner in = new Scanner(System.in);
-//        listall(tasklist);
-        System.out.println("---------------------------------\n");
+        listall(tasklist);
+        System.out.println("---------------------------------");
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *\n");
-        System.out.println("\nwhich element to edit in a task\n");
-        System.out.println("1.completion");
-        System.out.println("2.name of event");
-        System.out.println("3.description of event");
-        System.out.println("4.date to event \n");
-        System.out.println("enter your choice : ");
+        edit.menu();
         int choice = in.nextInt();
         System.out.println("\n\n*  *  *  *  *  *  *  *  *  *  *  *");
-        System.out.println("\n---------------------------------");
-
+        System.out.println("---------------------------------");
+        switch (choice)
+        {
+            case 1 -> edit.completion(tasklist);
+            case 2 -> edit.event_name(tasklist);
+            case 3 -> edit.event_description(tasklist);
+            case 4 -> edit.due_date(tasklist);
+            default -> System.out.println("enter correct choice");
+        }
     }
 
     private static void deletetask() {
