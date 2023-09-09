@@ -1,6 +1,7 @@
 package app.task;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class edit {
     public static void menu()
@@ -15,7 +16,8 @@ public class edit {
 
     public static void completion(ArrayList<tasks> tasklist)
     {
-        
+
+
     }
     public static void event_name(ArrayList<tasks> tasklist)
     {

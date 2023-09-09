@@ -1,6 +1,5 @@
 
 package app.task;
-import app.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -72,7 +71,6 @@ public class tasks {
     public static void main(String[] args) {
         System.out.println("welcome to the to-do-list-app");
         ArrayList<tasks> taskList = new ArrayList<>(10);
-
         int choice = 0;
         while(choice!=5) {
             display();
@@ -115,6 +113,7 @@ public class tasks {
             throw new RuntimeException(e);
         }
 
+
         boolean completion = false;
         tasks new_task = new tasks(event_name, event_descirption, duedate , completion);
         taskList.add(new_task);
@@ -140,7 +139,7 @@ public class tasks {
         for (int i = 0; i < taskList.size(); i++) {
             tasks current = taskList.get(i);
             System.out.println("''''''''''''''''''''");
-            System.out.println("Event id "+i+1+current.toString());
+            System.out.println("Event id "+i+1+"\n"+current.toString());
             System.out.println("''''''''''''''''''''");
         }
         System.out.println("-------------------------");
@@ -151,6 +150,8 @@ public class tasks {
         listall(tasklist);
         System.out.println("---------------------------------");
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *\n");
+        System.out.println("enter the task number you want to edit :");
+        int to_eidt = in.nextInt() ;
         edit.menu();
         int choice = in.nextInt();
         System.out.println("\n\n*  *  *  *  *  *  *  *  *  *  *  *");
