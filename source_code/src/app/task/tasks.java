@@ -1,5 +1,6 @@
 
 package app.task;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -9,12 +10,11 @@ public class tasks {
     Date Due_date;
     boolean is_complete;
 
-    public tasks(String event_name, String event_description, Date due_date, boolean completion)
-    {
-        this.Event_name=event_name;
-        this.Event_description=event_description;
-        this.Due_date=due_date;
-        this.is_complete=completion;
+    public tasks(String event_name, String event_description, Date due_date, boolean completion) {
+        this.Event_name = event_name;
+        this.Event_description = event_description;
+        this.Due_date = due_date;
+        this.is_complete = completion;
     }
 
     public String getEvent_name() {
@@ -72,7 +72,7 @@ public class tasks {
         System.out.println("welcome to the to-do-list-app");
         ArrayList<tasks> taskList = new ArrayList<>(10);
         int choice = 0;
-        while(choice!=5) {
+        while (choice != 5) {
             display();
             choice = getchoice();
             switch (choice) {
@@ -87,7 +87,7 @@ public class tasks {
     }
 
 
-    public static void addtask(Scanner in , ArrayList<tasks> taskList) {
+    public static void addtask(Scanner in, ArrayList<tasks> taskList) {
 //        get the event name
         System.out.println("enter event name");
         String event_name = in.nextLine();
@@ -106,8 +106,7 @@ public class tasks {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             duedate = dateFormat.parse(datestr);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("enter in dd-MM-yyyy format only");
             throw new RuntimeException(e);
@@ -115,23 +114,9 @@ public class tasks {
 
 
         boolean completion = false;
-        tasks new_task = new tasks(event_name, event_descirption, duedate , completion);
+        tasks new_task = new tasks(event_name, event_descirption, duedate, completion);
         taskList.add(new_task);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private static void listall(ArrayList<tasks> taskList) {
@@ -139,7 +124,7 @@ public class tasks {
         for (int i = 0; i < taskList.size(); i++) {
             tasks current = taskList.get(i);
             System.out.println("''''''''''''''''''''");
-            System.out.println("Event id "+i+1+"\n"+current.toString());
+            System.out.println("Event id " + i + 1 + "\n" + current.toString());
             System.out.println("''''''''''''''''''''");
         }
         System.out.println("-------------------------");
@@ -151,17 +136,16 @@ public class tasks {
         System.out.println("---------------------------------");
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *\n");
         System.out.println("enter the task number you want to edit :");
-        int to_eidt = in.nextInt() ;
+        int to_eidt = in.nextInt();
         edit.menu();
         int choice = in.nextInt();
         System.out.println("\n\n*  *  *  *  *  *  *  *  *  *  *  *");
         System.out.println("---------------------------------");
-        switch (choice)
-        {
-            case 1 -> edit.completion(tasklist);
-            case 2 -> edit.event_name(tasklist);
-            case 3 -> edit.event_description(tasklist);
-            case 4 -> edit.due_date(tasklist);
+        switch (choice) {
+            case 1 -> edit.completion(tasklist, to_eidt);
+            case 2 -> edit.event_name(tasklist, to_eidt);
+            case 3 -> edit.event_description(tasklist, to_eidt);
+            case 4 -> edit.due_date(tasklist, to_eidt);
             default -> System.out.println("enter correct choice");
         }
     }
@@ -169,12 +153,13 @@ public class tasks {
     private static void deletetask() {
     }
 
-    public String toString(){
+    public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String duedatestr = dateFormat.format(Due_date);
-        return " Event name : " + Event_name + "\n Event Description : " + Event_description + "\n Due Date : " + duedatestr + "\ncompletion : "+ is_complete;
+        return " Event name : " + Event_name + "\n Event Description : " + Event_description + "\n Due Date : " + duedatestr + "\ncompletion : " + is_complete;
 
     }
+
     private static void exitapp() {
         System.out.println("exiting the application");
     }
